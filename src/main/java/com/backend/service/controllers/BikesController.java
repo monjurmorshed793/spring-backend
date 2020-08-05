@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/bikes")
+@Transactional
 public class BikesController {
 
     private final  BikeRepository bikeRepository;

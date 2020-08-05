@@ -78,7 +78,11 @@
 			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-jpamodelgen</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
@@ -130,7 +134,12 @@
 								<artifactId>spring-boot-configuration-processor</artifactId>
 								<version>${spring-boot.version}</version>
 							</path>
-							<!-- jhipster-needle-maven-add-annotation-processor -->
+							<!-- For JPA static metamodel generation -->
+							<path>
+								<groupId>org.hibernate</groupId>
+								<artifactId>hibernate-jpamodelgen</artifactId>
+								<version>${hibernate.version}</version>
+							</path>
 						</annotationProcessorPaths>
 					</configuration>
 				</plugin>
