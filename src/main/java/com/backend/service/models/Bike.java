@@ -1,9 +1,19 @@
 package com.backend.service.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.Objects;
 
+@Entity
 public class Bike {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     private String name;
     private String email;
     private String phone;
@@ -13,6 +23,13 @@ public class Bike {
     private Date purchaseDate;
     private boolean contact;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -76,5 +93,26 @@ public class Bike {
 
     public void setContact(boolean contact) {
         this.contact = contact;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Bike)) return false;
+        Bike bike = (Bike) o;
+        return isContact() == bike.isContact() &&
+                Objects.equals(getId(), bike.getId()) &&
+                Objects.equals(getName(), bike.getName()) &&
+                Objects.equals(getEmail(), bike.getEmail()) &&
+                Objects.equals(getPhone(), bike.getPhone()) &&
+                Objects.equals(getModel(), bike.getModel()) &&
+                Objects.equals(getSerialNumber(), bike.getSerialNumber()) &&
+                Objects.equals(getPurchasePrice(), bike.getPurchasePrice()) &&
+                Objects.equals(getPurchaseDate(), bike.getPurchaseDate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getEmail(), getPhone(), getModel(), getSerialNumber(), getPurchasePrice(), getPurchaseDate(), isContact());
     }
 }

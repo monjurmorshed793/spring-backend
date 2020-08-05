@@ -11,13 +11,15 @@
 	<groupId>com.backend</groupId>
 	<artifactId>service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>service</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
-		<maven.version>3.3.9</maven.version>
+		<maven.version>3.6.3</maven.version>
 		<java.version>11</java.version>
 		<spring-boot.version>2.3.2.RELEASE</spring-boot.version>
+		<maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
 		<!-- The hibernate version should match the one managed by
         https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies/${spring-boot.version} -->
 		<hibernate.version>5.4.18.Final</hibernate.version>
@@ -40,6 +42,9 @@
 		<maven-war-plugin.version>3.2.3</maven-war-plugin.version>
 		<maven-checkstyle.version>3.1.1</maven-checkstyle.version>
 		<checkstyle.version>8.29</checkstyle.version>
+
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
 	</properties>
 
 	<dependencies>
@@ -63,6 +68,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -93,23 +99,25 @@
 	</dependencies>
 
 	<build>
+		<defaultGoal>spring-boot:run</defaultGoal>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
 		</plugins>
 		<pluginManagement>
 			<plugins>
-			<!--	<plugin>
+				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>${maven-compiler-plugin.version}</version>
@@ -122,10 +130,10 @@
 								<artifactId>spring-boot-configuration-processor</artifactId>
 								<version>${spring-boot.version}</version>
 							</path>
-							&lt;!&ndash; jhipster-needle-maven-add-annotation-processor &ndash;&gt;
+							<!-- jhipster-needle-maven-add-annotation-processor -->
 						</annotationProcessorPaths>
 					</configuration>
-				</plugin>-->
+				</plugin>
 				<plugin>
 					<groupId>org.liquibase</groupId>
 					<artifactId>liquibase-maven-plugin</artifactId>
@@ -138,7 +146,7 @@
 						<defaultSchemaName>ServiceBackend</defaultSchemaName>
 						<username>root</username>
 						<password></password>
-						<referenceUrl>hibernate:spring:org.cash.manager.domain?dialect=org.hibernate.dialect.MySQL8Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
+						<referenceUrl>hibernate:spring:com.backend.service.models?dialect=org.hibernate.dialect.MySQL8Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
 						<verbose>true</verbose>
 						<logging>debug</logging>
 						<contexts>!test</contexts>
